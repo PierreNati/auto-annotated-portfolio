@@ -75,8 +75,8 @@ body {
     overflow-x: hidden;
     
     /* Custom scrollbar */
-    scrollbar-width: thin;
-    scrollbar-color: #ccc #f0f0f0;
+   /* scrollbar-width: thin;
+    scrollbar-color: #ccc #f0f0f0; */
 }
 
 .album-container::-webkit-scrollbar {
