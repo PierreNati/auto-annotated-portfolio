@@ -1,245 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Album scrollable — Grille responsive</title>
-<style>
-  :root{
-    --gap: 10px;
-    --cols: 12;           /* nombre de colonnes de la grille */
-    --row-size: 8px;      /* hauteur de base des "lignes" de la grille (utilisée pour le calcul de span) */
-    --album-width: 1000px; /* largeur max de l'album (pour démo). Peut être 100% */
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Album photo 2 colonnes</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      background: #f7f7f7;
+    }
 
-  body{
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    display: flex;
-    justify-content: center;
-    padding: 24px;
-    background:#f6f6f8;
-  }
+    .album {
+      max-width: 1000px;   /* largeur max de l'album */
+      width: 100%;
+      padding: 10px;
+      column-count: 2;     /* 2 colonnes fixes */
+      column-gap: 10px;    /* espace entre les colonnes */
+    }
 
-  .album-wrap{
-    width: 100%;
-    max-width: var(--album-width);
-    border-radius: 10px;
-    background: white;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-    padding: 14px;
-  }
+    .album img {
+      width: 100%;         /* image = largeur de la colonne */
+      height: auto;        /* conserve le ratio */
+      margin-bottom: 10px; /* espace entre images */
+      display: block;
+      border-radius: 6px;
+    }
 
-  .album-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom: 12px;
-  }
-  .album-header h1{ font-size:18px; margin:0; }
-  .controls { font-size:13px; color:#555; }
-
-  /* Grille principale */
-  .album{
-    height: 70vh;              /* zone scrollable */
-    overflow: auto; 
-    padding: var(--gap);
-    box-sizing: border-box;
-    display: grid;
-    grid-template-columns: repeat(var(--cols), 1fr);
-    grid-auto-rows: var(--row-size); /* base row height used to compute spans */
-    grid-auto-flow: dense;
-    gap: var(--gap);
-    align-items: start;
-  }
-
-  .photo{
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    border-radius: 6px;
-    background: #eee;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06) inset;
-  }
-
-  .photo img{
-    display: block;
-    width: 100%;
-    height: auto; /* conserve le ratio */
-    vertical-align: middle;
-  }
-
-  /* petit badge pour la démo */
-  .meta{
-    position:absolute;
-    left:8px;
-    top:8px;
-    background: rgba(0,0,0,0.45);
-    color:white;
-    padding:4px 6px;
-    font-size:12px;
-    border-radius:4px;
-    pointer-events:none;
-  }
-
-  /* Responsive : réduire nombre de colonnes sur petits écrans */
-  @media (max-width:900px){
-    :root{ --cols: 8; }
-  }
-  @media (max-width:560px){
-    :root{ --cols: 6; --row-size:6px; }
-  }
-</style>
+    /* Sur mobile, passe en 1 colonne */
+    @media (max-width: 600px) {
+      .album {
+        column-count: 1;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<div class="album-wrap">
-  <div class="album-header">
-    <h1>Album — scrollable</h1>
-    <div class="controls">Colspan = entre 30% et 90% — ratio conservé</div>
+  <div class="album">
+    <img src="https://picsum.photos/id/1015/800/600" alt="">
+    <img src="https://picsum.photos/id/1016/400/700" alt="">
+    <img src="https://picsum.photos/id/1025/600/900" alt="">
+    <img src="https://picsum.photos/id/1033/1200/800" alt="">
+    <img src="https://picsum.photos/id/1035/500/500" alt="">
+    <img src="https://picsum.photos/id/1040/700/1200" alt="">
   </div>
-
-  <div id="album" class="album">
-    <!-- Les éléments photo seront injectés par JavaScript -->
-  </div>
-</div>
-
-<script>
-/*
-  Principe :
-  - La grille a N colonnes (--cols). On décide pour chaque image d'un 'colSpan' (combien de colonnes elle occupe).
-  - ColSpan est choisi pour représenter une largeur entre 30% et 90% de la largeur du conteneur.
-  - Après chargement de l'image, on calcule le nombre de "row span" nécessaire pour garder le ratio naturel :
-      rowSpan = Math.ceil( (imageHeightOnScreen) / gridAutoRow )
-    avec imageHeightOnScreen calculé à partir du ratio naturel et de la largeur effective (colSpan * columnWidth).
-  - On applique via style inline : grid-column: span X; grid-row: span Y;
-*/
-
-const container = document.getElementById('album');
-
-/* Exemple d'URLs — remplace par tes propres images */
-const IMAGES = [
-  'https://picsum.photos/id/1015/1400/900',
-  'https://picsum.photos/id/1016/1200/1600',
-  'https://picsum.photos/id/1025/1200/800',
-  'https://picsum.photos/id/1033/800/1200',
-  'https://picsum.photos/id/1035/1200/900',
-  'https://picsum.photos/id/1040/900/1400',
-  'https://picsum.photos/id/1056/1600/1000',
-  'https://picsum.photos/id/1060/900/900',
-  'https://picsum.photos/id/1069/1200/760',
-  'https://picsum.photos/id/1074/900/1300',
-  'https://picsum.photos/id/1084/1400/900',
-  'https://picsum.photos/id/1080/800/1200'
-];
-
-/* Config : largeur min et max en pourcentage de l'album */
-const MIN_WIDTH_PERC = 30; // %
-const MAX_WIDTH_PERC = 90; // %
-
-/* crée un élément photo et l'insère */
-function addPhoto(src, idx){
-  const item = document.createElement('div');
-  item.className = 'photo';
-  // badge démo
-  const meta = document.createElement('div');
-  meta.className = 'meta';
-  meta.textContent = `#${idx+1}`;
-  item.appendChild(meta);
-
-  const img = document.createElement('img');
-  img.decoding = 'async';
-  img.src = src;
-  img.alt = 'Photo ' + (idx+1);
-  item.appendChild(img);
-
-  // set a temporary size so layout doesn't collapse - we'll adjust after load
-  item.style.gridColumn = 'span 4';
-  item.style.gridRow = 'span 20';
-
-  container.appendChild(item);
-
-  img.addEventListener('load', () => {
-    fitImageToGrid(item, img);
-  });
-
-  // handle errors gracefully
-  img.addEventListener('error', () => {
-    item.style.background = '#ddd';
-    meta.textContent = 'erreur';
-  });
-}
-
-/* Calcule et applique grid spans pour une image */
-function fitImageToGrid(item, img){
-  // récupérer variables CSS de la grille
-  const styles = getComputedStyle(container);
-  const cols = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--cols')) || 12;
-  const gap = parseFloat(styles.gap) || parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gap')) || 10;
-  const rowSize = parseFloat(styles.gridAutoRows) || parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--row-size')) || 8;
-
-  // largeur du conteneur "inner" (sans padding)
-  const rect = container.getBoundingClientRect();
-  // calculer width disponible par colonne (on soustrait gaps totaux)
-  const totalGapWidth = (cols - 1) * gap;
-  const columnWidth = (rect.width - totalGapWidth) / cols;
-
-  // choisir une largeur cible entre MIN% et MAX% de rect.width
-  const targetPerc = randomBetween(MIN_WIDTH_PERC, MAX_WIDTH_PERC);
-  const targetWidthPx = rect.width * (targetPerc / 100);
-
-  // convertir en nombre de colonnes (au moins 1, max = cols)
-  let colSpan = Math.max(1, Math.round(targetWidthPx / (columnWidth + gap))); // arrondir
-  colSpan = Math.min(colSpan, cols);
-
-  // si colSpan est 0 (rare), mettre 1
-  if (colSpan < 1) colSpan = 1;
-
-  // largeur réelle que l'image occupe = colSpan * columnWidth + (colSpan -1)*gap
-  const widthOccupied = colSpan * columnWidth + (colSpan - 1) * gap;
-
-  // ratio naturel de l'image
-  const naturalW = img.naturalWidth || img.width;
-  const naturalH = img.naturalHeight || img.height;
-  const ratio = (naturalH / naturalW) || 1;
-
-  // hauteur en px que prendra l'image à la largeur widthOccupied
-  const heightOccupied = widthOccupied * ratio;
-
-  // nombre de rows à span : ceil(heightOccupied / rowSize)
-  const rowSpan = Math.max(1, Math.ceil(heightOccupied / rowSize));
-
-  // appliquer les spans
-  item.style.gridColumn = `span ${colSpan}`;
-  item.style.gridRow = `span ${rowSpan}`;
-
-  // remove explicit inline width/height to let img be responsive
-  img.style.width = '100%';
-  img.style.height = 'auto';
-}
-
-/* helper */
-function randomBetween(a, b){
-  return Math.floor(Math.random() * (b - a + 1)) + a;
-}
-
-/* initialisation : ajout des images */
-IMAGES.forEach((url, i) => addPhoto(url, i));
-
-/* On réajuste au redimensionnement (pour recalculer columnWidth & rowSpan) */
-let resizeTimer = null;
-window.addEventListener('resize', () => {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => {
-    // recalc pour toutes les images déjà chargées
-    const items = container.querySelectorAll('.photo');
-    items.forEach(item => {
-      const img = item.querySelector('img');
-      if (img && img.complete && img.naturalWidth) {
-        fitImageToGrid(item, img);
-      }
-    });
-  }, 120);
-});
-</script>
 </body>
 </html>
