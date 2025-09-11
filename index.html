@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pierre Nativel - Photographe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.4;
+            transition: all 0.3s ease;
+        }
+
+        /* Version selector */
+        .version-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .version-btn {
+            padding: 8px 16px;
+            border: 1px solid;
+            background: transparent;
+            cursor: pointer;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        /* VERSION 1: VOGUE CLASSIC - Noir et blanc épuré */
+        .version-1 {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .version-1 .version-btn {
+            border-color: #000;
+            color: #000;
+        }
+
+        .version-1 .version-btn.active,
+        .version-1 .version-btn:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        .version-1 .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid #000;
+        }
+
+        .version-1 .logo {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 28px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #000;
+            text-transform: uppercase;
+        }
+
+        .version-1 .nav-link {
+            color: #000;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .version-1 .photo {
+            box-shadow: none;
+            border: 1px solid #000;
+            margin-bottom: 30px;
+        }
+
+        .version-1 .photo:hover {
+            transform: none;
+            box-shadow: 5px 5px 0 #000;
+        }
+
+        .version-1 .contact-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 400;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* VERSION 2: VOGUE POLAND - Sombre et contrasté */
+        .version-2 {
+            background-color: #0a0a0a;
+            color: #ffffff;
+        }
+
+        .version-2 .version-btn {
+            border-color: #fff;
+            color: #fff;
+        }
+
+        .version-2 .version-btn.active,
+        .version-2 .version-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .version-2 .header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid #333;
+        }
+
+        .version-2 .logo {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 26px;
+            font-weight: 100;
+            letter-spacing: 4px;
+            color: #ffffff;
+            text-transform: lowercase;
+        }
+
+        .version-2 .nav-link {
+            color: #cccccc;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 200;
+            letter-spacing: 2px;
+            text-transform: lowercase;
+        }
+
+        .version-2 .nav-link:hover {
+            color: #ffffff;
+        }
+
+        .version-2 .photo {
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+            margin-bottom: 40px;
+            transition: all 0.4s ease;
+        }
+
+        .version-2 .photo:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.2);
+        }
+
+        .version-2 .contact-title {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 100;
+            color: #ffffff;
+            letter-spacing: 6px;
+            text-transform: lowercase;
+        }
+
+        .version-2 .contact-content {
+            color: #cccccc;
+        }
+
+        .version-2 .contact-email {
+            color: #ffffff;
+            border-bottom-color: #666;
+        }
+
+        .version-2 .contact-email:hover {
+            border-bottom-color: #fff;
+        }
+
+        /* VERSION 3: SPHÈRES - Warm et sophistiqué */
+        .version-3 {
+            background: linear-gradient(135deg, #f7f3f0 0%, #ede4da 100%);
+            color: #2c2016;
+        }
+
+        .version-3 .version-btn {
+            border-color: #8b6f47;
+            color: #8b6f47;
+        }
+
+        .version-3 .version-btn.active,
+        .version-3 .version-btn:hover {
+            background: #8b6f47;
+            color: #f7f3f0;
+        }
+
+        .version-3 .header {
+            background: rgba(247, 243, 240, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(139, 111, 71, 0.2);
+        }
+
+        .version-3 .logo {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #8b6f47;
+            font-style: italic;
+        }
+
+        .version-3 .nav-link {
+            color: #8b6f47;
+            font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .version-3 .nav-link:hover {
+            color: #2c2016;
+        }
+
+        .version-3 .photo {
+            box-shadow: 0 8px 32px rgba(139, 111, 71, 0.15);
+            margin-bottom: 35px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .version-3 .photo:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(139, 111, 71, 0.25);
+        }
+
+        .version-3 .contact-title {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-weight: 600;
+            color: #8b6f47;
+            font-style: italic;
+        }
+
+        .version-3 .contact-content {
+            color: #5a4a3a;
+            font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 300;
+        }
+
+        .version-3 .contact-email {
+            color: #8b6f47;
+            border-bottom-color: #d4c4b0;
+        }
+
+        .version-3 .contact-email:hover {
+            border-bottom-color: #8b6f47;
+        }
+
+        /* Common styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .main-content {
+            margin-top: 100px;
+            display: flex;
+            min-height: calc(100vh - 100px);
+            padding: 0 40px;
+        }
+
+        .album-column {
+            flex: 1;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .photo {
+            margin-bottom: 25px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .photo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .contact-page {
+            display: none;
+            padding: 150px 40px 60px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-size: 42px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .contact-content {
+            font-size: 18px;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .contact-content p {
+            margin-bottom: 25px;
+        }
+
+        .contact-email {
+            text-decoration: none;
+            border-bottom: 1px solid;
+            transition: all 0.3s ease;
+            font-weight: 400;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .version-selector {
+                top: 10px;
+                right: 10px;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .version-btn {
+                padding: 6px 12px;
+                font-size: 10px;
+            }
+
+            .header {
+                padding: 20px 25px;
+            }
+
+            .logo {
+                font-size: 22px !important;
+            }
+
+            .main-content {
+                flex-direction: column;
+                padding: 0 25px;
+                margin-top: 80px;
+            }
+
+            .album-column {
+                padding: 15px 0;
+            }
+
+            .contact-page {
+                padding: 120px 25px 40px;
+            }
+
+            .contact-title {
+                font-size: 32px;
+            }
+
+            .contact-content {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 0 20px;
+            }
+
+            .header {
+                padding: 15px 20px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body class="version-1">
+    <!-- Version selector -->
+    <div class="version-selector">
+        <button class="version-btn active" onclick="switchVersion(1)">Classic</button>
+        <button class="version-btn" onclick="switchVersion(2)">Dark</button>
+        <button class="version-btn" onclick="switchVersion(3)">Warm</button>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo" onclick="showHome()">Pierre Nativel</div>
+        <nav>
+            <a class="nav-link" onclick="showContact()">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Home page with albums -->
+    <div id="home-page" class="main-content">
+        <div class="album-column" id="album1"></div>
+        <div class="album-column" id="album2"></div>
+    </div>
+
+    <!-- Contact page -->
+    <div id="contact-page" class="contact-page">
+        <h1 class="contact-title">Contact</h1>
+        <div class="contact-content">
+            <p>Pour toute demande de collaboration, shooting ou projet photographique, n'hésitez pas à me contacter.</p>
+            <p><a href="mailto:pierre.nativel@email.com" class="contact-email">pierre.nativel@email.com</a></p>
+            <p>Basé à Rouen, Normandie<br>
+            Disponible pour des projets en France et à l'international</p>
+        </div>
+    </div>
+
+    <script>
+        // Sample high-fashion/editorial style images
+        const sampleImages = [
+            { url: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=600&fit=crop', ratio: 0.67 },
+            { url: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=300&fit=crop', ratio: 1.33 },
+            { url: 'https://images.unsplash.com/photo-1506629905607-45c9e9e94b4e?w=400&h=500&fit=crop', ratio: 0.8 },
+            { url: 'https://images.unsplash.com/photo-1494790108755-2616c90a8e6b?w=400&h=600&fit=crop', ratio: 0.67 },
+            { url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop', ratio: 1.33 },
+            { url: 'https://images.unsplash.com/photo-1514315384763-ba401779410f?w=400&h=600&fit=crop', ratio: 0.67 },
+            { url: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=400&fit=crop', ratio: 1 },
+            { url: 'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=400&h=500&fit=crop', ratio: 0.8 },
+            { url: 'https://images.unsplash.com/photo-1517849845537-4d257902454a?w=400&h=300&fit=crop', ratio: 1.33 },
+            { url: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&h=600&fit=crop', ratio: 0.67 },
+            { url: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=500&fit=crop', ratio: 0.8 },
+            { url: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=400&h=300&fit=crop', ratio: 1.33 },
+            { url: 'https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?w=400&h=600&fit=crop', ratio: 0.67 },
+            { url: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=400&fit=crop', ratio: 1 },
+            { url: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=400&h=500&fit=crop', ratio: 0.8 },
+            { url: 'https://images.unsplash.com/photo-1506629905607-45c9e9e94b4e?w=400&h=300&fit=crop', ratio: 1.33 },
+            { url: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=600&fit=crop', ratio: 0.67 },
+            { url: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=500&fit=crop', ratio: 0.8 },
+            { url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop', ratio: 1.33 },
+            { url: 'https://images.unsplash.com/photo-1494790108755-2616c90a8e6b?w=400&h=600&fit=crop', ratio: 0.67 }
+        ];
+
+        let imageIndex = 0;
+
+        function switchVersion(version) {
+            const body = document.body;
+            body.className = `version-${version}`;
+            
+            // Update active button
+            document.querySelectorAll('.version-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.version-btn')[version - 1].classList.add('active');
+        }
+
+        function createPhoto(imageData, index) {
+            const photo = document.createElement('div');
+            photo.className = 'photo';
+            
+            const img = document.createElement('img');
+            img.src = imageData.url;
+            img.alt = `Photo ${index + 1}`;
+            img.loading = 'lazy';
+            
+            photo.appendChild(img);
+            return photo;
+        }
+
+        function loadInitialImages() {
+            const album1 = document.getElementById('album1');
+            const album2 = document.getElementById('album2');
+            
+            for (let i = 0; i < 10; i++) {
+                if (imageIndex < sampleImages.length) {
+                    const photo = createPhoto(sampleImages[imageIndex], imageIndex);
+                    if (i % 2 === 0) {
+                        album1.appendChild(photo);
+                    } else {
+                        album2.appendChild(photo);
+                    }
+                    imageIndex++;
+                }
+            }
+        }
+
+        function loadMoreImages() {
+            const album1 = document.getElementById('album1');
+            const album2 = document.getElementById('album2');
+            
+            for (let i = 0; i < 4; i++) {
+                if (imageIndex < sampleImages.length) {
+                    const photo = createPhoto(sampleImages[imageIndex], imageIndex);
+                    if (i % 2 === 0) {
+                        album1.appendChild(photo);
+                    } else {
+                        album2.appendChild(photo);
+                    }
+                    imageIndex++;
+                } else {
+                    imageIndex = 0;
+                    const photo = createPhoto(sampleImages[imageIndex], imageIndex);
+                    if (i % 2 === 0) {
+                        album1.appendChild(photo);
+                    } else {
+                        album2.appendChild(photo);
+                    }
+                    imageIndex++;
+                }
+            }
+        }
+
+        let isLoading = false;
+        function handleScroll() {
+            if (isLoading) return;
+            
+            const scrollTop = window.pageYOffset;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            if (scrollTop + windowHeight >= documentHeight - 1000) {
+                isLoading = true;
+                loadMoreImages();
+                setTimeout(() => {
+                    isLoading = false;
+                }, 100);
+            }
+        }
+
+        function showHome() {
+            document.getElementById('home-page').style.display = 'flex';
+            document.getElementById('contact-page').style.display = 'none';
+            window.addEventListener('scroll', handleScroll);
+        }
+
+        function showContact() {
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('contact-page').style.display = 'block';
+            window.removeEventListener('scroll', handleScroll);
+        }
+
+        // Initialize
+        loadInitialImages();
+        window.addEventListener('scroll', handleScroll);
+
+        // Photo click handler
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'IMG' && e.target.closest('.photo')) {
+                console.log('Photo clicked:', e.target.src);
+            }
+        });
+    </script>
+</body>
+</html>
