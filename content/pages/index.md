@@ -50,6 +50,7 @@ sections:
           - pl-4
           - pr-4
         textAlign: center
+        borderRadius: x-small
   - type: ContactSection
     colors: colors-f
     backgroundSize: full
