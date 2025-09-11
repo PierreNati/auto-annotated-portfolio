@@ -80,7 +80,7 @@ body {
 }
 
 .album-container::-webkit-scrollbar {
-    width: 6px;
+    width: 0px;
 }
 
 .album-container::-webkit-scrollbar-track {
@@ -89,7 +89,7 @@ body {
 
 .album-container::-webkit-scrollbar-thumb {
     background: #ccc;
-    border-radius: 3px;
+    border-radius: 0px;
 }
 
 .album-container::-webkit-scrollbar-thumb:hover {
@@ -98,7 +98,7 @@ body {
 
 /* Left album styling */
 #album-left {
-    border-right: 1px solid #000;
+    border-right: 0px solid #000;
 }
 
 .album-content {
@@ -121,7 +121,7 @@ body {
     overflow: hidden;
     cursor: pointer;
     transition: all 0.3s ease;
-    border: 1px solid #000;
+    border: 0px solid #000;
 }
 
 .photo:hover {
