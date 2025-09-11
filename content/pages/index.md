@@ -34,7 +34,7 @@ sections:
         caption: Image four caption
         elementId: ''
     colors: colors-f
-    spacing: 16
+    spacing: 11
     columns: 2
     aspectRatio: auto
     showCaption: false
