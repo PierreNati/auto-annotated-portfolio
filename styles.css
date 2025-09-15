@@ -74,9 +74,9 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     
-    /* Custom scrollbar */
+    /* Custom scrollbar 
     scrollbar-width: thin;
-    scrollbar-color: #ccc #f0f0f0;
+    scrollbar-color: #ccc #f0f0f0; 
 }
 
 .album-container::-webkit-scrollbar {
@@ -94,7 +94,7 @@ body {
 
 .album-container::-webkit-scrollbar-thumb:hover {
     background: #999;
-}
+} */
 
 /* Left album styling */
 #album-left {
@@ -104,7 +104,7 @@ body {
 /* Masonry layout for albums */
 .masonry-album {
     padding: 20px 15px;
-    column-count: 1;
+    column-count: 2;
     column-gap: 15px;
     column-fill: auto;
 }
@@ -220,6 +220,7 @@ body {
     }
     
     .masonry-album {
+        column-count: 1;    /* Sur mobile : 1 colonne par album */
         padding: 15px 20px;
     }
     
