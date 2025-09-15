@@ -293,7 +293,7 @@ body {
 /* Enhanced masonry for larger screens */
 @media (min-width: 1024px) {
     .masonry-album {
-        column-count: 1;
+        column-count: 2;
         max-width: 500px;
         margin: 0 auto;
     }
