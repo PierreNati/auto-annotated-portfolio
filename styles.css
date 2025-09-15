@@ -136,8 +136,9 @@ body {
 
 /* Contact page */
 .contact-page {
+    text-align: center;
     display: none;
-    padding: 150px 40px 60px;
+    padding: 400px 40px 60px;
     max-width: 700px;
     margin: 0 auto;
     height: calc(100vh - 100px);
@@ -145,7 +146,8 @@ body {
 }
 
 .contact-title {
-    font-family: 'Playfair Display', Georgia, serif;
+    text-align: center;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
     font-size: 42px;
     font-weight: 400;
     color: #000;
@@ -155,7 +157,7 @@ body {
     text-align: center;
 }
 
-.contact-content {
+.contact-text {
     font-size: 18px;
     line-height: 1.8;
     text-align: center;
