@@ -74,7 +74,7 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     
-   Custom scrollbar 
+  /* Custom scrollbar */
     scrollbar-width: none;
     scrollbar-color: #ccc #f0f0f0;  /* 
 }
@@ -103,18 +103,18 @@ body {
 
 /* Masonry layout for albums */
 .masonry-album {
-    padding: 5px 5px;
+    padding: 0px 0px;
     column-count: 2;
-    column-gap: 5px;
+    column-gap: 20px;
     column-fill: balance;
 }
 
 #album-left .masonry-album {
-    padding-right: 10px;
+    padding-right: 0px;
 }
 
 #album-right .masonry-album {
-    padding-left: 10px;
+    padding-left: 0px;
 }
 
 /* Masonry items (images) */
