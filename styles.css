@@ -98,7 +98,7 @@ body {
 
 /* Left album styling */
 #album-left {
-    border-right: 1px solid #000;
+    border-right: 0px solid #000;
 }
 
 /* Masonry layout for albums */
@@ -110,11 +110,11 @@ body {
 }
 
 #album-left .masonry-album {
-    padding-right: 25px;
+    padding-right: 10px;
 }
 
 #album-right .masonry-album {
-    padding-left: 25px;
+    padding-left: 10px;
 }
 
 /* Masonry items (images) */
@@ -124,7 +124,7 @@ body {
     margin-bottom: 15px;
     display: block;
     break-inside: avoid;
-    border: 1px solid #000;
+    border: 0px solid #000;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -216,7 +216,7 @@ body {
     
     #album-left {
         border-right: none;
-        border-bottom: 1px solid #000;
+        border-bottom: 0px solid #000;
     }
     
     .masonry-album {
