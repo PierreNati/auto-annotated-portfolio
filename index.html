@@ -37,41 +37,44 @@
     </div>
 
     <script>
-        // Sample images with different ratios for variety
-        const allImages = [
-            { url: 'https://picsum.photos/id/1015/400/600', alt: 'Photo 1' },
-            { url: 'https://picsum.photos/id/1016/400/700', alt: 'Photo 2' },
-            { url: 'https://picsum.photos/id/1025/400/500', alt: 'Photo 3' },
-            { url: 'https://picsum.photos/id/1033/400/300', alt: 'Photo 4' },
-            { url: 'https://picsum.photos/id/1035/400/400', alt: 'Photo 5' },
-            { url: 'https://picsum.photos/id/1040/400/800', alt: 'Photo 6' },
-            { url: 'https://picsum.photos/id/1050/400/600', alt: 'Photo 7' },
-            { url: 'https://picsum.photos/id/1060/400/450', alt: 'Photo 8' },
-            { url: 'https://picsum.photos/id/1070/400/650', alt: 'Photo 9' },
-            { url: 'https://picsum.photos/id/1080/400/550', alt: 'Photo 10' },
-            { url: 'https://picsum.photos/id/200/400/700', alt: 'Photo 11' },
-            { url: 'https://picsum.photos/id/201/400/400', alt: 'Photo 12' },
-            { url: 'https://picsum.photos/id/202/400/600', alt: 'Photo 13' },
-            { url: 'https://picsum.photos/id/203/400/500', alt: 'Photo 14' },
-            { url: 'https://picsum.photos/id/204/400/750', alt: 'Photo 15' },
-            { url: 'https://picsum.photos/id/206/400/350', alt: 'Photo 16' },
-            { url: 'https://picsum.photos/id/208/400/600', alt: 'Photo 17' },
-            { url: 'https://picsum.photos/id/209/400/450', alt: 'Photo 18' },
-            { url: 'https://picsum.photos/id/210/400/550', alt: 'Photo 19' },
-            { url: 'https://picsum.photos/id/211/400/700', alt: 'Photo 20' },
-            { url: 'https://picsum.photos/id/212/400/400', alt: 'Photo 21' },
-            { url: 'https://picsum.photos/id/213/400/650', alt: 'Photo 22' },
-            { url: 'https://picsum.photos/id/214/400/500', alt: 'Photo 23' },
-            { url: 'https://picsum.photos/id/215/400/600', alt: 'Photo 24' },
-            { url: 'https://picsum.photos/id/216/400/450', alt: 'Photo 25' },
-            { url: 'https://picsum.photos/id/217/400/750', alt: 'Photo 26' },
-            { url: 'https://picsum.photos/id/218/400/350', alt: 'Photo 27' },
-            { url: 'https://picsum.photos/id/219/400/600', alt: 'Photo 28' },
-            { url: 'https://picsum.photos/id/220/400/550', alt: 'Photo 29' },
-            { url: 'https://picsum.photos/id/221/400/700', alt: 'Photo 30' }
+        // Independent image lists for each album
+        const leftAlbumImages = [
+            { url: 'https://picsum.photos/id/1015/400/600', alt: 'Left Photo 1' },
+            { url: 'https://picsum.photos/id/1016/400/700', alt: 'Left Photo 2' },
+            { url: 'https://picsum.photos/id/1025/400/500', alt: 'Left Photo 3' },
+            { url: 'https://picsum.photos/id/1033/400/300', alt: 'Left Photo 4' },
+            { url: 'https://picsum.photos/id/1035/400/400', alt: 'Left Photo 5' },
+            { url: 'https://picsum.photos/id/1040/400/800', alt: 'Left Photo 6' },
+            { url: 'https://picsum.photos/id/1050/400/600', alt: 'Left Photo 7' },
+            { url: 'https://picsum.photos/id/1060/400/450', alt: 'Left Photo 8' },
+            { url: 'https://picsum.photos/id/1070/400/650', alt: 'Left Photo 9' },
+            { url: 'https://picsum.photos/id/1080/400/550', alt: 'Left Photo 10' },
+            { url: 'https://picsum.photos/id/200/400/700', alt: 'Left Photo 11' },
+            { url: 'https://picsum.photos/id/201/400/400', alt: 'Left Photo 12' },
+            { url: 'https://picsum.photos/id/202/400/600', alt: 'Left Photo 13' },
+            { url: 'https://picsum.photos/id/203/400/500', alt: 'Left Photo 14' },
+            { url: 'https://picsum.photos/id/204/400/750', alt: 'Left Photo 15' }
         ];
 
-        // Shuffle array function
+        const rightAlbumImages = [
+            { url: 'https://picsum.photos/id/300/400/600', alt: 'Right Photo 1' },
+            { url: 'https://picsum.photos/id/301/400/700', alt: 'Right Photo 2' },
+            { url: 'https://picsum.photos/id/302/400/500', alt: 'Right Photo 3' },
+            { url: 'https://picsum.photos/id/303/400/400', alt: 'Right Photo 4' },
+            { url: 'https://picsum.photos/id/304/400/800', alt: 'Right Photo 5' },
+            { url: 'https://picsum.photos/id/305/400/350', alt: 'Right Photo 6' },
+            { url: 'https://picsum.photos/id/306/400/650', alt: 'Right Photo 7' },
+            { url: 'https://picsum.photos/id/307/400/450', alt: 'Right Photo 8' },
+            { url: 'https://picsum.photos/id/308/400/550', alt: 'Right Photo 9' },
+            { url: 'https://picsum.photos/id/309/400/700', alt: 'Right Photo 10' },
+            { url: 'https://picsum.photos/id/310/400/400', alt: 'Right Photo 11' },
+            { url: 'https://picsum.photos/id/311/400/600', alt: 'Right Photo 12' },
+            { url: 'https://picsum.photos/id/312/400/500', alt: 'Right Photo 13' },
+            { url: 'https://picsum.photos/id/313/400/750', alt: 'Right Photo 14' },
+            { url: 'https://picsum.photos/id/314/400/350', alt: 'Right Photo 15' }
+        ];
+
+        // Shuffle function remains the same
         function shuffleArray(array) {
             const shuffled = [...array];
             for (let i = shuffled.length - 1; i > 0; i--) {
@@ -88,12 +91,9 @@
         let rightIndex = 0;
 
         function initializeAlbums() {
-            // Create two different random orders
-            const shuffled1 = shuffleArray(allImages);
-            const shuffled2 = shuffleArray(allImages);
-            
-            leftImages = shuffled1;
-            rightImages = shuffled2;
+            // Create shuffled versions of each independent list
+            leftImages = shuffleArray(leftAlbumImages);
+            rightImages = shuffleArray(rightAlbumImages);
             
             leftIndex = 0;
             rightIndex = 0;
@@ -133,13 +133,14 @@
             }
         }
 
+        // Updated load functions to use independent lists
         function loadMoreImagesLeft() {
             const album1 = document.getElementById('album1');
             
             for (let i = 0; i < 4; i++) {
                 if (leftIndex >= leftImages.length) {
-                    // Reshuffle and restart
-                    leftImages = shuffleArray(allImages);
+                    // Reshuffle the LEFT album images only
+                    leftImages = shuffleArray(leftAlbumImages);
                     leftIndex = 0;
                 }
                 
@@ -154,8 +155,8 @@
             
             for (let i = 0; i < 4; i++) {
                 if (rightIndex >= rightImages.length) {
-                    // Reshuffle and restart
-                    rightImages = shuffleArray(allImages);
+                    // Reshuffle the RIGHT album images only
+                    rightImages = shuffleArray(rightAlbumImages);
                     rightIndex = 0;
                 }
                 
@@ -164,7 +165,7 @@
                 rightIndex++;
             }
         }
-
+        
         // Independent scroll handlers
         let isLoadingLeft = false;
         let isLoadingRight = false;
