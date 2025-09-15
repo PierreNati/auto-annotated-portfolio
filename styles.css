@@ -106,7 +106,7 @@ body {
     padding: 5px 5px;
     column-count: 2;
     column-gap: 5px;
-    column-fill: auto;
+    column-fill: balance;
 }
 
 #album-left .masonry-album {
