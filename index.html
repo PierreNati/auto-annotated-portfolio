@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camille Levitan - Photographe</title>
+    <title>Pierre Nativel - Photographe</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="nav-link" onclick="showHome()">Camille Levitan</div>
+        <div class="logo" onclick="showHome()">Pierre Nativel</div>
         <nav>
             <a class="nav-link" onclick="showContact()">Contact</a>
         </nav>
     </header>
-    <!-- Home page with independent scrollable albums -->
+
+    <!-- Home page with independent scrollable masonry albums -->
     <div id="home-page" class="main-content">
         <div class="album-container" id="album-left">
-            <div class="album-content" id="album1"></div>
+            <div class="masonry-album" id="album1"></div>
         </div>
         <div class="album-container" id="album-right">
-            <div class="album-content" id="album2"></div>
+            <div class="masonry-album" id="album2"></div>
         </div>
     </div>
 
@@ -36,71 +37,99 @@
     </div>
 
     <script>
-        // Sample images with different ratios
-        const sampleImages = [
-            { url: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=600&fit=crop', ratio: 0.67 },
-            { url: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=300&fit=crop', ratio: 1.33 },
-            { url: 'https://images.unsplash.com/photo-1506629905607-45c9e9e94b4e?w=400&h=500&fit=crop', ratio: 0.8 },
-            { url: 'https://images.unsplash.com/photo-1494790108755-2616c90a8e6b?w=400&h=600&fit=crop', ratio: 0.67 },
-            { url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop', ratio: 1.33 },
-            { url: 'https://images.unsplash.com/photo-1514315384763-ba401779410f?w=400&h=600&fit=crop', ratio: 0.67 },
-            { url: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=400&fit=crop', ratio: 1 },
-            { url: 'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=400&h=500&fit=crop', ratio: 0.8 },
-            { url: 'https://images.unsplash.com/photo-1517849845537-4d257902454a?w=400&h=300&fit=crop', ratio: 1.33 },
-            { url: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&h=600&fit=crop', ratio: 0.67 },
-            { url: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=500&fit=crop', ratio: 0.8 },
-            { url: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=400&h=300&fit=crop', ratio: 1.33 },
-            { url: 'https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?w=400&h=600&fit=crop', ratio: 0.67 },
-            { url: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=400&fit=crop', ratio: 1 },
-            { url: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=400&h=500&fit=crop', ratio: 0.8 },
-            { url: 'https://images.unsplash.com/photo-1506629905607-45c9e9e94b4e?w=400&h=300&fit=crop', ratio: 1.33 },
-            { url: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=600&fit=crop', ratio: 0.67 },
-            { url: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=500&fit=crop', ratio: 0.8 },
-            { url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop', ratio: 1.33 },
-            { url: 'https://images.unsplash.com/photo-1494790108755-2616c90a8e6b?w=400&h=600&fit=crop', ratio: 0.67 }
+        // Sample images with different ratios for variety
+        const allImages = [
+            { url: 'https://picsum.photos/id/1015/400/600', alt: 'Photo 1' },
+            { url: 'https://picsum.photos/id/1016/400/700', alt: 'Photo 2' },
+            { url: 'https://picsum.photos/id/1025/400/500', alt: 'Photo 3' },
+            { url: 'https://picsum.photos/id/1033/400/300', alt: 'Photo 4' },
+            { url: 'https://picsum.photos/id/1035/400/400', alt: 'Photo 5' },
+            { url: 'https://picsum.photos/id/1040/400/800', alt: 'Photo 6' },
+            { url: 'https://picsum.photos/id/1050/400/600', alt: 'Photo 7' },
+            { url: 'https://picsum.photos/id/1060/400/450', alt: 'Photo 8' },
+            { url: 'https://picsum.photos/id/1070/400/650', alt: 'Photo 9' },
+            { url: 'https://picsum.photos/id/1080/400/550', alt: 'Photo 10' },
+            { url: 'https://picsum.photos/id/200/400/700', alt: 'Photo 11' },
+            { url: 'https://picsum.photos/id/201/400/400', alt: 'Photo 12' },
+            { url: 'https://picsum.photos/id/202/400/600', alt: 'Photo 13' },
+            { url: 'https://picsum.photos/id/203/400/500', alt: 'Photo 14' },
+            { url: 'https://picsum.photos/id/204/400/750', alt: 'Photo 15' },
+            { url: 'https://picsum.photos/id/206/400/350', alt: 'Photo 16' },
+            { url: 'https://picsum.photos/id/208/400/600', alt: 'Photo 17' },
+            { url: 'https://picsum.photos/id/209/400/450', alt: 'Photo 18' },
+            { url: 'https://picsum.photos/id/210/400/550', alt: 'Photo 19' },
+            { url: 'https://picsum.photos/id/211/400/700', alt: 'Photo 20' },
+            { url: 'https://picsum.photos/id/212/400/400', alt: 'Photo 21' },
+            { url: 'https://picsum.photos/id/213/400/650', alt: 'Photo 22' },
+            { url: 'https://picsum.photos/id/214/400/500', alt: 'Photo 23' },
+            { url: 'https://picsum.photos/id/215/400/600', alt: 'Photo 24' },
+            { url: 'https://picsum.photos/id/216/400/450', alt: 'Photo 25' },
+            { url: 'https://picsum.photos/id/217/400/750', alt: 'Photo 26' },
+            { url: 'https://picsum.photos/id/218/400/350', alt: 'Photo 27' },
+            { url: 'https://picsum.photos/id/219/400/600', alt: 'Photo 28' },
+            { url: 'https://picsum.photos/id/220/400/550', alt: 'Photo 29' },
+            { url: 'https://picsum.photos/id/221/400/700', alt: 'Photo 30' }
         ];
 
-        let leftIndex = 0;
-        let rightIndex = 10; // Start right album with different images
+        // Shuffle array function
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
 
-        function createPhoto(imageData, index) {
-            const photo = document.createElement('div');
-            photo.className = 'photo';
+        // Initialize shuffled arrays for each album
+        let leftImages = [];
+        let rightImages = [];
+        let leftIndex = 0;
+        let rightIndex = 0;
+
+        function initializeAlbums() {
+            // Create two different random orders
+            const shuffled1 = shuffleArray(allImages);
+            const shuffled2 = shuffleArray(allImages);
             
+            leftImages = shuffled1;
+            rightImages = shuffled2;
+            
+            leftIndex = 0;
+            rightIndex = 0;
+        }
+
+        function createPhoto(imageData) {
             const img = document.createElement('img');
             img.src = imageData.url;
-            img.alt = `Photo ${index + 1}`;
+            img.alt = imageData.alt;
             img.loading = 'lazy';
+            img.className = 'masonry-item';
             
-            photo.appendChild(img);
-            return photo;
+            // Add click handler
+            img.addEventListener('click', function() {
+                console.log('Photo clicked:', imageData.url);
+            });
+            
+            return img;
         }
 
         function loadInitialImages() {
             const album1 = document.getElementById('album1');
             const album2 = document.getElementById('album2');
             
-            // Load initial images for left album
-            for (let i = 0; i < 8; i++) {
-                if (leftIndex < sampleImages.length) {
-                    const photo = createPhoto(sampleImages[leftIndex], leftIndex);
-                    album1.appendChild(photo);
-                    leftIndex++;
-                }
+            // Load initial images for left album (8 images)
+            for (let i = 0; i < 8 && leftIndex < leftImages.length; i++) {
+                const img = createPhoto(leftImages[leftIndex]);
+                album1.appendChild(img);
+                leftIndex++;
             }
             
-            // Load initial images for right album
-            for (let i = 0; i < 8; i++) {
-                if (rightIndex < sampleImages.length) {
-                    const photo = createPhoto(sampleImages[rightIndex], rightIndex);
-                    album2.appendChild(photo);
-                    rightIndex++;
-                } else {
-                    rightIndex = 0; // Loop back
-                    const photo = createPhoto(sampleImages[rightIndex], rightIndex);
-                    album2.appendChild(photo);
-                    rightIndex++;
-                }
+            // Load initial images for right album (8 images)
+            for (let i = 0; i < 8 && rightIndex < rightImages.length; i++) {
+                const img = createPhoto(rightImages[rightIndex]);
+                album2.appendChild(img);
+                rightIndex++;
             }
         }
 
@@ -108,16 +137,15 @@
             const album1 = document.getElementById('album1');
             
             for (let i = 0; i < 4; i++) {
-                if (leftIndex < sampleImages.length) {
-                    const photo = createPhoto(sampleImages[leftIndex], leftIndex);
-                    album1.appendChild(photo);
-                    leftIndex++;
-                } else {
-                    leftIndex = 0; // Loop back
-                    const photo = createPhoto(sampleImages[leftIndex], leftIndex);
-                    album1.appendChild(photo);
-                    leftIndex++;
+                if (leftIndex >= leftImages.length) {
+                    // Reshuffle and restart
+                    leftImages = shuffleArray(allImages);
+                    leftIndex = 0;
                 }
+                
+                const img = createPhoto(leftImages[leftIndex]);
+                album1.appendChild(img);
+                leftIndex++;
             }
         }
 
@@ -125,16 +153,15 @@
             const album2 = document.getElementById('album2');
             
             for (let i = 0; i < 4; i++) {
-                if (rightIndex < sampleImages.length) {
-                    const photo = createPhoto(sampleImages[rightIndex], rightIndex);
-                    album2.appendChild(photo);
-                    rightIndex++;
-                } else {
-                    rightIndex = 0; // Loop back
-                    const photo = createPhoto(sampleImages[rightIndex], rightIndex);
-                    album2.appendChild(photo);
-                    rightIndex++;
+                if (rightIndex >= rightImages.length) {
+                    // Reshuffle and restart
+                    rightImages = shuffleArray(allImages);
+                    rightIndex = 0;
                 }
+                
+                const img = createPhoto(rightImages[rightIndex]);
+                album2.appendChild(img);
+                rightIndex++;
             }
         }
 
@@ -150,12 +177,12 @@
             const scrollHeight = container.scrollHeight;
             const clientHeight = container.clientHeight;
             
-            if (scrollTop + clientHeight >= scrollHeight - 1000) {
+            if (scrollTop + clientHeight >= scrollHeight - 800) {
                 isLoadingLeft = true;
                 loadMoreImagesLeft();
                 setTimeout(() => {
                     isLoadingLeft = false;
-                }, 100);
+                }, 200);
             }
         }
 
@@ -167,12 +194,12 @@
             const scrollHeight = container.scrollHeight;
             const clientHeight = container.clientHeight;
             
-            if (scrollTop + clientHeight >= scrollHeight - 1000) {
+            if (scrollTop + clientHeight >= scrollHeight - 800) {
                 isLoadingRight = true;
                 loadMoreImagesRight();
                 setTimeout(() => {
                     isLoadingRight = false;
-                }, 100);
+                }, 200);
             }
         }
 
@@ -195,19 +222,18 @@
             document.getElementById('album-right').removeEventListener('scroll', handleRightScroll);
         }
 
-        // Initialize
-        loadInitialImages();
-        
-        // Add initial scroll listeners
-        document.getElementById('album-left').addEventListener('scroll', handleLeftScroll);
-        document.getElementById('album-right').addEventListener('scroll', handleRightScroll);
+        // Initialize everything
+        function init() {
+            initializeAlbums();
+            loadInitialImages();
+            
+            // Add initial scroll listeners
+            document.getElementById('album-left').addEventListener('scroll', handleLeftScroll);
+            document.getElementById('album-right').addEventListener('scroll', handleRightScroll);
+        }
 
-        // Photo click handler
-        document.addEventListener('click', function(e) {
-            if (e.target.tagName === 'IMG' && e.target.closest('.photo')) {
-                console.log('Photo clicked:', e.target.src);
-            }
-        });
+        // Start when page loads
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
